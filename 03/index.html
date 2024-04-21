@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter</title>
+    <link rel="stylesheet" href="theme.css" />
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container pt-5" id="app" v-cloak>
+      <div class="card center">
+        <div v-html="myHtml"></div>
+        <!-- <h2 v-text="title"></h2>
+        <h2 v-once="title">{{ title }}</h2>
+        <h2 v-pre>{{ title }}</h2>
+        <button class="btn" @click="title = 'Теперь другое название'">
+          Изменить заголовок
+        </button> -->
+
+        <div class="form-control">
+          <input type="text" @keyup.enter="addItem" ref="myInput" />
+        </div>
+        <ul class="list" v-if="items.length">
+          <!-- <li class="item" v-for="(item, idx) in 10">
+            <strong>{{ idx }}</strong>
+            {{ item }}
+          </li> -->
+
+          <!-- указываем  key для работы с virtualDOM деревом -->
+          <!-- если в v-for="(item, idx) in evenItems", то выведет только четные -->
+          <li
+            class="item"
+            v-for="(item, idx) in items"
+            @click="remove(idx), log(item)"
+            :key="item"
+          >
+            <strong>{{ item }}</strong>&nbsp;
+            <input type="text" @click.stop />
+            <!-- @click.stop = stopPropagation -->
+          </li>
+
+          <!-- <li class="item" v-for="(value, key) in person">
+            <strong>{{ key }}</strong>: {{ value }}
+          </li> -->
+        </ul>
+        <!-- Оставляем в дом дереве -->
+        <h3 v-show="!items.length">Елеминтов нет</h3>
+        <!-- <h3 v-else>Елеминтов нет</h3> -->
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
